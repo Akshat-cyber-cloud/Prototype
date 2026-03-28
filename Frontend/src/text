@@ -1,1 +1,26 @@
-Hello
+:root {
+  /* Base */
+  --bg-primary: #F7F3EE;
+  --bg-secondary: #FFFFFF;
+  --surface-soft: #FFF8F2;
+  --border: #E5E0DA;
+
+  /* Text */
+  --text-primary: #2C2C2C;
+  --text-secondary: #6F6F6F;
+
+  /* Brand */
+  --primary: #E67E22;
+
+  /* Categories */
+  --shawarma: #E67E22;
+  --waffle: #F4B400;
+  --rice: #27AE60;
+  --pancake: #D98C8C;
+
+  /* States */
+  --success: #2ECC71;
+  --error: #E74C3C;
+  --warning: #F39C12;
+  --info: #3498DB;
+} 
