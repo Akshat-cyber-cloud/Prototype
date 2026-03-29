@@ -167,8 +167,143 @@
   margin-left: 2px;
 }
 
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001; /* Above overlay */
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  display: none;
+}
+
+.mobile-menu-header {
+  display: none;
+}
+
+.mobile-only-item {
+  display: none !important;
+}
+
+/* Mobile & Tablet Responsiveness */
 @media (max-width: 992px) {
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Overlay */
+  .mobile-menu-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Right-side Sliding Drawer */
   .navbar-links {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Hidden off-screen */
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 20px;
+    gap: 1.5rem;
+    z-index: 999;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+    transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow-y: auto;
+  }
+
+  .navbar-links.active {
+    right: 0;
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .close-menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+  }
+
+  /* Reset link styles for mobile */
+  .navbar-link {
+    color: #333;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  .navbar-link::before {
+    display: none; /* Remove water fill on mobile */
+  }
+
+  .navbar-link:hover {
+    color: var(--primary);
+  }
+
+  /* Hide main location picker, show mobile one */
+  .navbar-left .location-picker {
     display: none;
+  }
+
+  .mobile-only-item {
+    display: block !important;
+    width: 100%;
+    margin-top: auto; /* Push to bottom */
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+
+  .mobile-location {
+    width: 100%;
+    background: #f8f8f8;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-actions .order-btn {
+    display: none; /* Hide 'Order Now' on very small screens to save space */
+  }
+  
+  .navbar {
+    padding: 1.2rem 5%;
   }
 }

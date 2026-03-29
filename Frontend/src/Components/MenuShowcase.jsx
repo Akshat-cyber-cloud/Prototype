@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './MenuShowcase.css';
 
 /**
@@ -9,6 +11,8 @@ const MenuShowcase = () => {
     // Scroll animation logic
     const containerRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
+    const { user } = useAuth();
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -54,27 +58,28 @@ const MenuShowcase = () => {
 
     const features = [
         {
-            title: 'Catering & Events',
-            desc: 'Bring the authentic taste of street-style shawarma to your special gatherings and private parties.',
+            title: 'GOODZ GATHERINGS',
+            desc: 'Elevate your event with the legendary charisma of hand-carved, street-style shawarma and gourmet sides.',
             icon: (
                 <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 1.53-.5 2h-1c-.17-.47-.5-1.5-.5-2Z" /><path d="M15 17a1 1 0 0 1 2 0c0 .5-.34 1.53-.5 2h-1c-.17-.47-.5-1.5-.5-2Z" /><path d="M7 17a1 1 0 0 1 2 0c0 .5-.34 1.53-.5 2h-1c-.17-.47-.5-1.5-.5-2Z" /><path d="M9 11V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5" /><rect x="2" y="11" width="20" height="10" rx="2" /></svg>
             )
         },
         {
-            title: 'Join the Master Wrappers',
-            desc: 'Work with the best in the business. We value skill, precision, and building the perfect wrap.',
+            title: 'CRAFT THE CRUNCH',
+            desc: "Join our squad of flavor architects. We value precision, passion, and the art of building the world's perfect wrap.",
             icon: (
                 <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
             )
         },
         {
-            title: 'Franchise Partnership',
-            desc: 'Spread the shawarma love! Own a franchise and bring our legendary flavors to your neighborhood.',
+            title: 'SCALE THE LEGEND',
+            desc: 'Spread the shawarma fever. Own a franchise and bring our gold standard of flavors to your neighborhood.',
             icon: (
                 <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
             )
         }
     ];
+
 
     return (
         <section
@@ -88,7 +93,7 @@ const MenuShowcase = () => {
         >
             {/* 1️⃣ Shawarma Menu Section */}
             <div className="menu-section">
-                <h2 className="menu-title">Our Shawarma</h2>
+                <h2 className="menu-title">OUR CUISINE</h2>
                 <div className="menu-grid">
                     {menuItems.map((item, idx) => (
                         <div key={idx} className={`category-card card-${item.category}`}>
@@ -98,7 +103,13 @@ const MenuShowcase = () => {
                             <div className="card-content">
                                 <h3 className="card-title">{item.title}</h3>
                                 <p className="card-subtitle">{item.subtitle}</p>
-                                <button className="card-btn" style={{ backgroundColor: 'var(--shawarma)' }}>Try it Now</button>
+                                <button 
+                                    className="card-btn" 
+                                    style={{ backgroundColor: 'var(--shawarma)', cursor: 'pointer' }}
+                                    onClick={() => navigate('/menu')}
+                                >
+                                    Try it Now
+                                </button>
                             </div>
                         </div>
                     ))}
@@ -120,7 +131,15 @@ const MenuShowcase = () => {
                         Hand-sliced from the grill, every wrap is a masterpiece of spice, crunch, and tradition.
                         Discover why our shawarma is the gold standard of flavor today.
                     </p>
-                    <button className="promo-cta" style={{ backgroundColor: 'var(--shawarma)', boxShadow: '0 10px 20px rgba(230, 126, 34, 0.3)' }}>Order Online Now</button>
+                    {!user && (
+                        <button 
+                            className="promo-cta" 
+                            style={{ backgroundColor: 'var(--shawarma)', boxShadow: '0 10px 20px rgba(230, 126, 34, 0.3)', cursor: 'pointer' }}
+                            onClick={() => navigate('/menu')}
+                        >
+                            Order Online Now
+                        </button>
+                    )}
                 </div>
             </div>
 
