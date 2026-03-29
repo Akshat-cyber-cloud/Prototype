@@ -1,15 +1,54 @@
-*{
+:root {
+  /* Base */
+  --bg-primary: #F7F3EE;
+  --bg-secondary: #FFFFFF;
+  --surface-soft: #FFF8F2;
+  --border: #E5E0DA;
+
+  /* Text */
+  --text-primary: #2C2C2C;
+  --text-secondary: #6F6F6F;
+
+  /* Brand */
+  --primary: #E67E22;
+
+  /* Categories */
+  --shawarma: #E67E22;
+  --waffle: #F4B400;
+  --rice: #27AE60;
+  --pancake: #D98C8C;
+
+  /* States */
+  --success: #2ECC71;
+  --error: #E74C3C;
+  --warning: #F39C12;
+  --info: #3498DB;
+
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-html.body{
-  height: 100%;
+body {
+  height: 100vh;
   width: 100%;
   background-color: var(--bg-primary);
-}
-html.body{
-  background-color: antiquewhite;
+  color: var(--text-primary);
+  line-height: 1.5;
 }
 
+.top-section {
+  background-image: url('./assets/Background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}

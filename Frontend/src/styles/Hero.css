@@ -1,4 +1,155 @@
-body{
-    background: #000;
-    color: aliceblue;
+.hero-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+
+.radial-menu {
+  position: relative;
+  width: 1200px;
+  height: 1200px;
+  margin-top: -170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radial-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 140px;
+  /* Shifts the rings down so they wrap tightly around the pizza */
+  left: 0;
+  pointer-events: none;
+}
+
+.radial-dot {
+  pointer-events: all;
+  cursor: pointer;
+  fill: #333333; /* Darker inactive dot */
+  transition: r 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.4s ease;
+}
+
+.radial-item.active .radial-dot {
+  fill: var(--primary);
+}
+
+.radial-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px; /* Increased from 13/14px */
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  pointer-events: all;
+  cursor: pointer;
+  /* Darker color for high contrast against light stone texture */
+  fill: #222222; 
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  user-select: none;
+  filter: drop-shadow(0 1px 2px rgba(255,255,255,0.5));
+}
+
+.radial-item.active .radial-label {
+  font-size: 19px;
+  fill: var(--primary);
+  filter: drop-shadow(0 0 12px rgba(255, 90, 31, 0.4));
+}
+
+.dot-pulse {
+  animation: ring-pulse 2s infinite;
+}
+
+@keyframes ring-pulse {
+  0% {
+    r: 12;
+    opacity: 1;
+    stroke-width: 1.5;
+  }
+
+  100% {
+    r: 30;
+    opacity: 0;
+    stroke-width: 0.5;
+  }
+}
+
+.pizza-display {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.pizza-image-container {
+  width: 750px;
+  /* Increased for cinematic "swarma" look */
+  height: 750px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-pizza-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.6));
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+}
+
+.main-pizza-image.active {
+  opacity: 1;
+  transform: scale(1.1);
+  /* Slight scale up for impact */
+  z-index: 2;
+}
+
+.main-pizza-image.inactive {
+  opacity: 0;
+  transform: scale(0.85);
+  z-index: 1;
+}
+
+.order-btn-center {
+  position: absolute;
+  /* Lock to pizza center */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  /* Glassmorphism/Dark look */
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 18px 52px;
+  border-radius: 60px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  cursor: pointer;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  z-index: 15;
+}
+
+.order-btn-center:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  transform: translate(-50%, -55%) scale(1.05);
+  /* Interactive hover */
+}
+
+.radial-ring {
+  transition: opacity 0.5s ease;
 }
