@@ -1,12 +1,33 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../styles/Navbar.css'
+import useGeolocation from '../hooks/useGeolocation'
 
 const Navbar = () => {
+  const { address, detectLocation, loading, error } = useGeolocation();
+
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
-        <span className="logo-text">FOODZ</span>
-        <span className="logo-dot">.</span>
+      <div className="navbar-left">
+        <Link to="/" className="navbar-logo">
+          <span className="logo-text">FOODZ</span>
+          <span className="logo-dot">.</span>
+        </Link>
+        
+        {/* Dynamic Location Display */}
+        <div className="location-picker" onClick={detectLocation}>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--primary)">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+          </svg>
+          <span className="location-text">
+            {loading ? "Detecting..." : error ? <b>{error}</b> : address || "Select Location"}
+          </span>
+          {error && (
+            <span className="location-error" title={error} style={{ cursor: 'help' }}>
+              !
+            </span>
+          )}
+        </div>
       </div>
       
       <ul className="navbar-links">
@@ -25,7 +46,8 @@ const Navbar = () => {
       </ul>
 
       <div className="navbar-actions">
-        <button className="order-btn">Order Now</button>
+        <Link to="/login" className="login-link">Login</Link>
+        <button className="order-btn" onClick={() => window.location.href = '#order'}>Order Now</button>
       </div>
     </nav>
   )

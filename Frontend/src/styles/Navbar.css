@@ -13,12 +13,13 @@
 }
 
 .navbar-logo {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff; /* pure white for maximum visibility */
   display: flex;
   align-items: center;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 }
 
 .logo-dot {
@@ -71,6 +72,34 @@
   color: var(--bg-secondary);
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.login-link {
+  text-decoration: none;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 12px 32px;
+  background: rgba(45, 52, 54, 0.9); /* Dark Charcoal */
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(45, 52, 54, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-link:hover {
+  background: #2d3436;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
 .navbar-actions .order-btn {
   background-color: var(--primary);
   color: white;
@@ -88,6 +117,54 @@
   background-color: #d35400;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(230, 126, 34, 0.3);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.location-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent white to block texture */
+  backdrop-filter: blur(10px);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Dark subtle border */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Soft shadow for "lift" */
+}
+
+.location-picker:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.location-text {
+  font-size: 0.9rem; /* Slightly larger */
+  font-weight: 700; /* Bolder */
+  color: #111111; /* Pure dark for visibility */
+  max-width: 340px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+
+.location-picker:hover .location-text {
+  color: var(--primary); /* Hover feedback */
+}
+
+.location-error {
+  color: #dc3545;
+  font-weight: 900;
+  margin-left: 2px;
 }
 
 @media (max-width: 992px) {
