@@ -1,0 +1,206 @@
+.order-history-page {
+  min-height: 100vh;
+  background-color: #fdfdfd;
+  padding: 120px 5% 60px;
+  font-family: 'Outfit', sans-serif;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.order-history-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.history-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.history-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.history-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.orders-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 30px;
+}
+
+.order-summary-card {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid #eeeeee;
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+}
+
+.order-summary-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  border-color: #e0e0e0;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f9f9f9;
+  padding-bottom: 15px;
+}
+
+.order-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-id {
+  font-weight: 700;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.order-date {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: #f1f3f8;
+  color: #555;
+}
+
+.status-badge.paid {
+  background-color: #e8f7f0;
+  color: #2ecc71;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.dish-thumbnails {
+  display: flex;
+  gap: 10px;
+}
+
+.mini-thumb {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+}
+
+.mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-thumb.more {
+  background: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.order-pricing {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.p-label {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.p-amount {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.btn-view-receipt {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: 2px solid #000;
+  background: transparent;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-view-receipt:hover {
+  background: #000;
+  color: white;
+}
+
+.empty-history {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.empty-icon {
+  font-size: 5rem;
+  margin-bottom: 20px;
+}
+
+.btn-browse {
+  margin-top: 30px;
+  padding: 14px 34px;
+  background: var(--primary, #e67e22);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(230, 126, 34, 0.2);
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 100px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .orders-list {
+    grid-template-columns: 1fr;
+  }
+}

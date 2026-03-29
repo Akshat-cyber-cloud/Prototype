@@ -1,10 +1,61 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import '../styles/Login.css';
 import LoginBg from '../assets/LoginBg.png';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { login } = useAuth();
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+
+        const endpoint = isLogin ? 'login' : 'register';
+        const url = `http://localhost:3000/api/auth/${endpoint}`;
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+                credentials: 'include' // Allow cookies
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Something went wrong');
+            }
+
+            // Success: Update global Auth State
+            login({ name: data.name, email: data.email });
+            
+            // Redirect to previous intended page (like Cart) or Menu
+            const from = location.state?.from || '/menu';
+            navigate(from);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="login-container">
@@ -25,20 +76,43 @@ const Login = () => {
                         <p>{isLogin ? "Sign in to continue your feast" : "Start your culinary journey with us"}</p>
                     </div>
 
-                    <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+                    {error && <div className="error-message" style={{ color: '#ff4d4d', marginBottom: '20px', fontWeight: 600 }}>{error}</div>}
+
+                    <form className="auth-form" onSubmit={handleSubmit}>
                         {!isLogin && (
                             <div className="input-group">
                                 <label>Full Name</label>
-                                <input type="text" placeholder="John Doe" required />
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    placeholder="John Doe" 
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required 
+                                />
                             </div>
                         )}
                         <div className="input-group">
                             <label>Email Address</label>
-                            <input type="email" placeholder="john@example.com" required />
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="john@example.com" 
+                                value={formData.email}
+                                onChange={handleChange}
+                                required 
+                            />
                         </div>
                         <div className="input-group">
                             <label>Password</label>
-                            <input type="password" placeholder="••••••••" required />
+                            <input 
+                                type="password" 
+                                name="password" 
+                                placeholder="••••••••" 
+                                value={formData.password}
+                                onChange={handleChange}
+                                required 
+                            />
                         </div>
 
                         {isLogin && (
@@ -50,8 +124,8 @@ const Login = () => {
                             </div>
                         )}
 
-                        <button type="submit" className="submit-btn">
-                            {isLogin ? "Sign In" : "Create Account"}
+                        <button type="submit" className="submit-btn" disabled={loading}>
+                            {loading ? "Processing..." : (isLogin ? "Sign In" : "Create Account")}
                         </button>
                     </form>
 
@@ -60,7 +134,10 @@ const Login = () => {
                             {isLogin ? "Don't have an account?" : "Already have an account?"}
                             <button 
                                 className="toggle-btn" 
-                                onClick={() => setIsLogin(!isLogin)}
+                                onClick={() => {
+                                    setIsLogin(!isLogin);
+                                    setError('');
+                                }}
                             >
                                 {isLogin ? "Sign Up" : "Sign In"}
                             </button>

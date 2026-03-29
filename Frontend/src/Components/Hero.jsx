@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "../styles/Hero.css";
 import Swarma1 from "../assets/ImagesHero/Swarma1.png";
 import Swarma2 from "../assets/ImagesHero/Swarma2.png";
@@ -6,6 +8,8 @@ import Swarma3 from "../assets/ImagesHero/Swarma3.png";
 
 const Hero = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    const navigate = useNavigate();
+    const { user } = useAuth();
 
     const items = [
         { name: "Chicken Swarma", image: Swarma1 },
@@ -61,7 +65,8 @@ const Hero = () => {
 
                     {items.map((item, i) => {
                         const { x, y, angle } = getCoordinates(i, rings[1]);
-                        const labelPos = getCoordinates(i, rings[2] + 45);
+                        const labelPos = getCoordinates(i, rings[2] + 30);
+
                         const isActive = i === activeIndex;
 
                         // Simplified rotation logic: keep text upright
@@ -72,7 +77,7 @@ const Hero = () => {
                                 <circle
                                     cx={x}
                                     cy={y}
-                                    r={35}
+                                    r={50}
                                     fill="transparent"
                                     className="dot-hitbox"
                                     style={{ cursor: "pointer", pointerEvents: "all" }}
@@ -82,7 +87,7 @@ const Hero = () => {
                                 <circle
                                     cx={x}
                                     cy={y}
-                                    r={isActive ? 16 : 8}
+                                    r={isActive ? 18 : 10}
                                     className="radial-dot"
                                     fill={isActive ? "var(--primary)" : "#444444"}
                                     onClick={() => setActiveIndex(i)}
@@ -92,13 +97,16 @@ const Hero = () => {
                                     <circle
                                         cx={x}
                                         cy={y}
-                                        r={24}
+                                        r={26}
                                         className="dot-pulse"
                                         fill="none"
                                         stroke="var(--primary)"
                                         strokeWidth="2"
                                     />
                                 )}
+
+
+
 
                                 <text
                                     x={labelPos.x}
@@ -133,7 +141,11 @@ const Hero = () => {
                                 className={`main-pizza-image ${index === activeIndex ? "active" : "inactive"}`}
                             />
                         ))}
-                        <button className="order-btn-center">ORDER NOW</button>
+                        {!user && (
+                            <button className="order-btn-center" onClick={() => navigate("/menu")}>
+                                ORDER NOW
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

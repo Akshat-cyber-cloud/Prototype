@@ -1,0 +1,216 @@
+.order-success-page {
+  min-height: 100vh;
+  background-color: #f4f7ff; /* Soft light blue/lavender like the reference */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.receipt-card {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* The "Punch" Effect on sides */
+.receipt-card::before,
+.receipt-card::after {
+  content: '';
+  position: absolute;
+  top: 45%; /* Alignment with the dashed line */
+  width: 30px;
+  height: 30px;
+  background-color: #f4f7ff; /* Match page background */
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.receipt-card::before { left: -15px; }
+.receipt-card::after { right: -15px; }
+
+/* Top Section: Success Icon & Header */
+.receipt-header {
+  padding: 40px 30px 20px;
+  text-align: center;
+}
+
+.success-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background-color: #e8f7f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.success-icon-wrapper svg {
+  width: 40px;
+  height: 40px;
+  color: #2ecc71;
+}
+
+.receipt-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.receipt-header p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Info Section (Top Half) */
+.receipt-info {
+  padding: 20px 30px;
+  border-bottom: 2px dashed #eee;
+  position: relative;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.info-label { color: #888; }
+.info-value { font-weight: 600; color: #333; }
+
+/* Items Section (Bottom Half) */
+.receipt-items {
+  padding: 30px 30px 20px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.item-qty {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.item-price {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Payment Method Box */
+.payment-method-box {
+  background-color: #f1f3f8;
+  border-radius: 16px;
+  padding: 15px;
+  margin: 20px 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.payment-logo {
+  background: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 900;
+  color: #2e69ff;
+  font-size: 0.9rem;
+  letter-spacing: -1px;
+  border: 1px solid #e0e0e0;
+}
+
+.payment-details {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* OTP Badge */
+.otp-section {
+  text-align: center;
+  padding: 0 30px 30px;
+}
+
+.otp-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #aaa;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.otp-code {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary, #e67e22);
+  letter-spacing: 8px;
+  margin-bottom: 25px;
+  font-family: 'Space Mono', monospace;
+}
+
+/* Footer Buttons */
+.receipt-actions {
+  display: flex;
+  gap: 15px;
+  padding: 0 30px 40px;
+}
+
+.btn-receipt-primary {
+  flex: 2;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-receipt-secondary {
+  flex: 1;
+  background-color: white;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-receipt-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.btn-receipt-secondary:hover { background-color: #f9f9f9; }
+
+@media (max-width: 480px) {
+  .receipt-card {
+    max-width: 100%;
+  }
+}
