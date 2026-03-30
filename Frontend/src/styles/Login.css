@@ -6,10 +6,12 @@
     position: relative;
     overflow: hidden;
     display: flex;
-    justify-content: flex-end; /* Dynamic right alignment */
+    justify-content: flex-end;
+    /* Dynamic right alignment */
     align-items: center;
     padding-right: 10%;
-    background: #fff; /* Crisp white fallback */
+    background: #fff;
+    /* Crisp white fallback */
 }
 
 .login-bg {
@@ -24,6 +26,7 @@
 .login-bg img {
     width: 100%;
     height: 100%;
+    
     object-fit: cover;
     pointer-events: none;
 }
@@ -32,12 +35,19 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 50%; /* Only misting the right side slightly */
+    width: 60%;
     height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4));
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 30%,
+        rgba(255, 255, 255, 0.9) 70%,
+        #ffffff 100%
+    );
     z-index: 2;
     pointer-events: none;
 }
+
 
 .form-wrapper {
     position: relative;
@@ -52,14 +62,16 @@
     -webkit-backdrop-filter: none;
     border: none;
     padding: 0;
-    color: #2d3436; /* Deep Charcoal for premium readability */
+    color: #2d3436;
+    /* Deep Charcoal for premium readability */
     animation: contentEntrance 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     position: relative;
 }
 
 .close-btn {
     position: absolute;
-    top: -60px; /* Floating above the header */
+    top: -60px;
+    /* Floating above the header */
     right: 0;
     width: 40px;
     height: 40px;
@@ -83,8 +95,15 @@
 }
 
 @keyframes contentEntrance {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .card-header h2 {
@@ -138,7 +157,8 @@
 
 .input-group input:focus {
     outline: none;
-    border-color: #ff5a1f; /* Signature Orange */
+    border-color: #ff5a1f;
+    /* Signature Orange */
 }
 
 .form-options {
@@ -162,7 +182,8 @@
 }
 
 .submit-btn {
-    background: #ff5a1f; /* Vibrant Highlight */
+    background: #ff5a1f;
+    /* Vibrant Highlight */
     color: #fff;
     border: none;
     border-radius: 12px;
@@ -204,14 +225,26 @@
     .login-container {
         padding: 30px;
         justify-content: center;
-        background: #fff; /* White background for mobile focus */
+        background: #fff;
+        /* White background for mobile focus */
     }
 
-    .login-bg { opacity: 0.1; } /* Subdue background image on mobile */
+    .login-bg {
+        opacity: 0.1;
+    }
 
-    .form-wrapper { width: 100%; }
+    /* Subdue background image on mobile */
 
-    .card-header h2 { font-size: 2.8rem; }
-    
-    .close-btn { top: -40px; right: 0; }
+    .form-wrapper {
+        width: 100%;
+    }
+
+    .card-header h2 {
+        font-size: 2.8rem;
+    }
+
+    .close-btn {
+        top: -40px;
+        right: 0;
+    }
 }
