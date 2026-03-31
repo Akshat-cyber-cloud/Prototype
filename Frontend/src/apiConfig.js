@@ -6,14 +6,17 @@
 const getBaseUrl = () => {
     const { hostname } = window.location;
 
-    // 1️⃣ For Local Development
+    // 🌐 Production URL (Render)
+    const productionBackend = 'https://prototype-ebca.onrender.com';
+
+    // 1️⃣ For Local Development (Fallback to Localhost)
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        // Change to productionBackend if you want to test against the live DB locally
         return 'http://localhost:3000';
     }
 
-    // 2️⃣ For Production (Render / Vercel)
-    // Both deployments will talk to this central backend
-    return 'https://prototype-ebca.onrender.com'; // Backend Base URL
+    // 2️⃣ For Deployed Environments (Vercel)
+    return productionBackend;
 };
 
 export const API_BASE_URL = getBaseUrl();

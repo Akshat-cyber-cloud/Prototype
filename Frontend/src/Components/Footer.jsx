@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import '../styles/Footer.css';
 
 const Footer = () => {
+    const { user } = useAuth();
     return (
         <footer className="main-footer">
             <div className="footer-top">
                 <div className="footer-brand-section">
-                    <Link to="/" className="footer-logo">
+                    <Link to={user ? "/menu" : "/"} className="footer-logo">
                         <span className="logo-text">FOODZ</span>
                         <span className="logo-dot">.</span>
                     </Link>
