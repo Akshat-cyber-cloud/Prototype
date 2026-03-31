@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../apiConfig'; // Added: Centralized API config
 import '../styles/Checkout.css';
 
 const Checkout = () => {
@@ -41,14 +42,14 @@ const Checkout = () => {
 
         try {
             // 0️⃣ Fetch Razorpay Key ID
-            const keyResponse = await fetch('http://localhost:3000/api/payment/get-key', {
+            const keyResponse = await fetch(`${API_BASE_URL}/api/payment/get-key`, {
                 credentials: 'include'
             });
             if (!keyResponse.ok) throw new Error("Could not fetch payment configuration");
             const { key: razorpayKey } = await keyResponse.json();
 
             // 1️⃣ Create Razorpay Order on Backend
-            const orderResponse = await fetch('http://localhost:3000/api/payment/create-order', {
+            const orderResponse = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -73,7 +74,7 @@ const Checkout = () => {
                 order_id: rzpOrder.id,
                 handler: async function (response) {
                     // 3️⃣ Verify Payment on Backend
-                    const verifyResponse = await fetch('http://localhost:3000/api/payment/verify', {
+                    const verifyResponse = await fetch(`${API_BASE_URL}/api/payment/verify`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

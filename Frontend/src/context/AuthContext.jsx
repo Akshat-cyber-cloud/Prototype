@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
+import { API_BASE_URL } from '../apiConfig'; // Added: Centralized API config
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
             // Always verify session status with backend on mount
             try {
-                const response = await fetch('http://localhost:3000/api/auth/profile', {
+                const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include'
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user');
         // Clear HttpOnly cookie via Backend API if route exists
         try {
-            await fetch('http://localhost:3000/api/auth/logout', { 
+            await fetch(`${API_BASE_URL}/api/auth/logout`, { 
                 method: 'POST', 
                 credentials: 'include' 
             });

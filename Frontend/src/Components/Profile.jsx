@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../apiConfig'; // Added: Centralized API config
 import '../styles/Profile.css';
 
 const Profile = () => {
@@ -26,7 +27,7 @@ const Profile = () => {
 
         const fetchProfile = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/auth/profile', {
+                const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include'
@@ -66,7 +67,7 @@ const Profile = () => {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:3000/api/auth/profile', {
+            const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
