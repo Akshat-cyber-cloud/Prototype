@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../apiConfig';
 import '../styles/Login.css';
 import LoginBg from '../assets/LoginBg.png';
 
@@ -28,7 +29,7 @@ const Login = () => {
         setLoading(true);
 
         const endpoint = isLogin ? 'login' : 'register';
-        const url = `http://localhost:3000/api/auth/${endpoint}`;
+        const url = `${API_BASE_URL}/api/auth/${endpoint}`; // Dynamic URL
 
         try {
             const response = await fetch(url, {
@@ -58,7 +59,7 @@ const Login = () => {
     };
 
     const handleGoogleLogin = () => {
-        window.location.href = 'http://localhost:3000/api/auth/google';
+        window.location.href = `${API_BASE_URL}/api/auth/google`; // Dynamic OAuth URL
     };
 
     return (
