@@ -24,8 +24,20 @@
   --warning: #F39C12;
   --info: #3498DB;
 
+  /* Theme Variations */
+  --bg-light: #F7F3EE;    /* Theme 1: Classic Light */
+  --bg-dark: #0B0B0B;     /* Theme 2: Midnight Dark */
+  --bg-accent: #F1F3F8;   /* Theme 3: Elegant Soft-Gray */
+
+  --text-on-dark: #FFFFFF;
+  --text-on-light: #2C2C2C;
+
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.theme-light { background-color: var(--bg-light); color: var(--text-on-light); }
+.theme-dark { background-color: var(--bg-dark); color: var(--text-on-dark); }
+.theme-accent { background-color: var(--bg-accent); color: var(--text-on-light); }
 
 * {
   margin: 0;
@@ -54,8 +66,6 @@ body {
   font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
   /* Removed redundant overflow-x hidden and min-height here to fix double scrollbar */
 }
-
-
 
 .top-section {
   background-image: url('./assets/Background.png');

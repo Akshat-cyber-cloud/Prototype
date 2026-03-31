@@ -98,3 +98,80 @@ exports.logout = async (req, res) => {
 };
 
 
+// @desc    Google Auth Callback
+// @route   GET /api/auth/google/callback
+// @access  Public
+exports.googleCallback = async (req, res) => {
+    try {
+        const user = req.user;
+        const token = generateToken(user._id);
+
+        // Set HttpOnly Cookie
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false, // Set to true in production
+            sameSite: "Lax",
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+        });
+
+        // Redirect to Frontend
+        res.redirect("http://localhost:5173/menu");
+    } catch (error) {
+        res.status(500).json({ message: "Auth Error", error: error.message });
+    }
+};
+
+// @desc    Get user profile
+// @route   GET /api/auth/profile
+// @access  Private
+exports.getUserProfile = async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            address: user.address,
+            gender: user.gender,
+            avatar: user.avatar,
+        });
+    } else {
+        res.status(404).json({ message: "User not found" });
+    }
+};
+
+// @desc    Update user profile
+// @route   PUT /api/auth/profile
+// @access  Private
+exports.updateUserProfile = async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.phone = req.body.phone || user.phone;
+        user.address = req.body.address || user.address;
+        user.gender = req.body.gender || user.gender;
+
+        if (req.body.password) {
+            user.password = req.body.password;
+        }
+
+        const updatedUser = await user.save();
+
+        res.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            phone: updatedUser.phone,
+            address: updatedUser.address,
+            gender: updatedUser.gender,
+            avatar: updatedUser.avatar,
+            message: "Profile updated successfully",
+        });
+    } else {
+        res.status(404).json({ message: "User not found" });
+    }
+};

@@ -11,9 +11,9 @@
 .receipt-card {
   background: white;
   width: 100%;
-  max-width: 420px;
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
   animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -42,42 +42,42 @@
 
 /* Top Section: Success Icon & Header */
 .receipt-header {
-  padding: 40px 30px 20px;
+  padding: 30px 25px 15px;
   text-align: center;
 }
 
 .success-icon-wrapper {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-color: #e8f7f0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
 }
 
 .success-icon-wrapper svg {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   color: #2ecc71;
 }
 
 .receipt-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .receipt-header p {
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 /* Info Section (Top Half) */
 .receipt-info {
-  padding: 20px 30px;
+  padding: 15px 25px;
   border-bottom: 2px dashed #eee;
   position: relative;
 }
@@ -85,8 +85,8 @@
 .info-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
-  font-size: 0.9rem;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
 }
 
 .info-label { color: #888; }
@@ -127,9 +127,9 @@
 /* Payment Method Box */
 .payment-method-box {
   background-color: #f1f3f8;
-  border-radius: 16px;
-  padding: 15px;
-  margin: 20px 30px;
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin: 15px 25px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -137,49 +137,50 @@
 
 .payment-logo {
   background: white;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 4px 10px;
+  border-radius: 6px;
   font-weight: 900;
   color: #2e69ff;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   letter-spacing: -1px;
   border: 1px solid #e0e0e0;
 }
 
 .payment-details {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #555;
+  line-height: 1.2;
 }
 
 /* OTP Badge */
 .otp-section {
   text-align: center;
-  padding: 0 30px 30px;
+  padding: 0 25px 20px;
 }
 
 .otp-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   color: #aaa;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   display: block;
 }
 
 .otp-code {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--primary, #e67e22);
-  letter-spacing: 8px;
-  margin-bottom: 25px;
+  letter-spacing: 6px;
+  margin-bottom: 15px;
   font-family: 'Space Mono', monospace;
 }
 
 /* Footer Buttons */
 .receipt-actions {
   display: flex;
-  gap: 15px;
-  padding: 0 30px 40px;
+  gap: 12px;
+  padding: 0 25px 30px;
 }
 
 .btn-receipt-primary {
@@ -187,10 +188,11 @@
   background-color: #000;
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 14px;
+  border-radius: 10px;
+  padding: 12px;
   font-weight: 600;
   cursor: pointer;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
@@ -199,10 +201,11 @@
   background-color: white;
   color: #555;
   border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 14px;
+  border-radius: 10px;
+  padding: 12px;
   font-weight: 600;
   cursor: pointer;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 

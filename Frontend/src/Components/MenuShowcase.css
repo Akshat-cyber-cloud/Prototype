@@ -25,7 +25,7 @@
   --error: #E74C3C;
   --warning: #F39C12;
   --info: #3498DB;
-  
+
   --dark-section-bg: #0C0C0C;
 }
 
@@ -35,6 +35,12 @@
   background-color: var(--bg-primary);
   overflow-x: hidden;
   position: relative;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+.menu-showcase-container.theme-dark {
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
 }
 
 /* 1️⃣ Menu Section Styles */
@@ -55,6 +61,11 @@
   color: var(--text-primary);
 }
 
+.theme-dark .menu-title {
+  color: var(--text-on-dark);
+  text-shadow: 0 0 20px rgba(230, 126, 34, 0.4);
+}
+
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -72,16 +83,32 @@
   flex-direction: column;
 }
 
+.theme-dark .category-card {
+  background: #1A1A1A; /* Slightly lighter than main bg for depth */
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
 .category-card:hover {
   transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
 }
 
 /* Category-specific glowing shadows on hover */
-.card-Shawarma:hover { box-shadow: 0 30px 60px rgba(230, 126, 34, 0.15); }
-.card-Rice.Bowl:hover { box-shadow: 0 30px 60px rgba(39, 174, 96, 0.15); }
-.card-Waffle:hover { box-shadow: 0 30px 60px rgba(244, 180, 0, 0.15); }
-.card-Pancakes:hover { box-shadow: 0 30px 60px rgba(217, 140, 140, 0.15); }
+.card-Shawarma:hover {
+  box-shadow: 0 30px 60px rgba(230, 126, 34, 0.15);
+}
+
+.card-Rice.Bowl:hover {
+  box-shadow: 0 30px 60px rgba(39, 174, 96, 0.15);
+}
+
+.card-Waffle:hover {
+  box-shadow: 0 30px 60px rgba(244, 180, 0, 0.15);
+}
+
+.card-Pancakes:hover {
+  box-shadow: 0 30px 60px rgba(217, 140, 140, 0.15);
+}
 
 
 .card-image-box {
@@ -89,14 +116,16 @@
   aspect-ratio: 1/1;
   overflow: hidden;
   position: relative;
-  padding: 12px 12px 0; /* Creates space for the rounded image */
+  padding: 12px 12px 0;
+  /* Creates space for the rounded image */
 }
 
 .card-image-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 24px; /* The requested border radius */
+  border-radius: 24px;
+  /* The requested border radius */
   transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
@@ -109,7 +138,8 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  flex: 1; /* Makes the content box take up all remaining card space */
+  flex: 1;
+  /* Makes the content box take up all remaining card space */
   gap: 8px;
 }
 
@@ -127,6 +157,9 @@
   margin-bottom: 12px;
 }
 
+.theme-dark .card-title { color: #FFFFFF; }
+.theme-dark .card-subtitle { color: #AAAAAA; }
+
 .card-btn {
   width: fit-content;
   padding: 12px 28px;
@@ -137,7 +170,8 @@
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   color: white;
-  margin-top: auto; /* Pushes the button to the very bottom to keep it in sync */
+  margin-top: auto;
+  /* Pushes the button to the very bottom to keep it in sync */
   padding-top: 12px;
 }
 
@@ -145,19 +179,30 @@
 .card-btn:hover {
   filter: brightness(1.1);
   transform: scale(1.1) translateX(4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Color Overrides for Cards */
-.card-shawarma .card-btn { background-color: var(--shawarma); }
-.card-waffle .card-btn { background-color: var(--waffle); }
-.card-rice .card-btn { background-color: var(--rice); }
-.card-pancake .card-btn { background-color: var(--pancake); }
+.card-shawarma .card-btn {
+  background-color: var(--shawarma);
+}
+
+.card-waffle .card-btn {
+  background-color: var(--waffle);
+}
+
+.card-rice .card-btn {
+  background-color: var(--rice);
+}
+
+.card-pancake .card-btn {
+  background-color: var(--pancake);
+}
 
 /* 2️⃣ Promotional Section Styles */
 .promo-section {
   background-color: var(--dark-section-bg);
-  background-image: 
+  background-image:
     radial-gradient(circle at 70% 50%, rgba(230, 126, 34, 0.1), transparent),
     url('https://www.transparenttextures.com/patterns/dark-matter.png');
   padding: 100px 5%;
@@ -187,8 +232,8 @@
   height: 350px;
   border-radius: 24px;
   object-fit: cover;
-  border: 4px solid rgba(255,255,255,0.1);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
   transition: all 0.5s ease;
 }
 
@@ -200,7 +245,7 @@
 .photo-2 {
   transform: translate(20px, 10px) rotate(4deg);
   z-index: 2;
-  border-color: rgba(255,255,255,0.2);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .photo-3 {
@@ -258,10 +303,14 @@
 
 /* 3️⃣ Features Section Styles */
 .features-section {
-  padding: 80px 5%;
+  padding: 60px 3%;
   background: var(--bg-primary);
   display: flex;
   justify-content: center;
+}
+
+.theme-dark .features-section {
+  background: transparent; /* Let the midnight dark flow through */
 }
 
 .features-list {
@@ -285,6 +334,14 @@
   transition: transform 0.3s ease;
 }
 
+.theme-dark .feature-item {
+  background-color: #1A1A1A;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.theme-dark .feature-title { color: #FFFFFF; }
+.theme-dark .feature-desc { color: #AAAAAA; }
+
 .feature-item:hover {
   transform: scale(1.02);
 }
@@ -298,7 +355,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
@@ -326,10 +383,12 @@
     flex-direction: column-reverse;
     text-align: center;
   }
+
   .promo-images {
     height: 450px;
     margin-top: -40px;
   }
+
   .promo-content {
     display: flex;
     flex-direction: column;
@@ -341,44 +400,62 @@
   .menu-section {
     padding: 60px 5% 40px;
   }
+
   .promo-section {
     padding: 60px 5%;
   }
+
   .features-section {
     padding: 60px 5%;
   }
+
   .menu-title {
     font-size: 2.5rem;
   }
+
   .promo-heading {
     font-size: 2.2rem;
   }
-  .photo-1, .photo-2, .photo-3 {
+
+  .photo-1,
+  .photo-2,
+  .photo-3 {
     width: 220px;
     height: 280px;
   }
 }
 
 @media (max-width: 480px) {
-  .menu-section, .promo-section, .features-section {
+
+  .menu-section,
+  .promo-section,
+  .features-section {
     padding: 50px 5%;
   }
+
   .menu-title {
     font-size: 2rem;
   }
+
   .promo-heading {
     font-size: 1.8rem;
   }
+
   .promo-images {
     height: 350px;
   }
-  .photo-1, .photo-2, .photo-3 {
+
+  .photo-1,
+  .photo-2,
+  .photo-3 {
     width: 180px;
     height: 230px;
   }
+
   .photo-1 {
     transform: translate(-20px, -10px) rotate(-6deg);
   }
+
   .photo-3 {
     transform: translate(30px, 20px) rotate(8deg);
   }

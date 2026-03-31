@@ -84,7 +84,7 @@ const MenuShowcase = () => {
     return (
         <section
             ref={containerRef}
-            className={`menu-showcase-container ${isVisible ? 'fade-in-active' : ''}`}
+            className={`menu-showcase-container theme-dark ${isVisible ? 'fade-in-active' : ''}`}
             style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(30px)',

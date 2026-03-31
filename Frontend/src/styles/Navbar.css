@@ -5,7 +5,8 @@
   padding: 1.5rem 5%;
   background-color: transparent !important;
   width: 100%;
-  position: absolute; /* Change to absolute so it sits OVER the hero area properly */
+  position: absolute;
+  /* Change to absolute so it sits OVER the hero area properly */
   top: 0;
   z-index: 1000;
   transition: var(--transition-smooth);
@@ -15,11 +16,13 @@
 .navbar-logo {
   font-size: 2rem;
   font-weight: 900;
-  color: #ffffff; /* pure white for maximum visibility */
+  color: #ffffff;
+  /* pure white for maximum visibility */
   display: flex;
   align-items: center;
   letter-spacing: -0.5px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  /* Subtle shadow for depth */
 }
 
 .logo-dot {
@@ -85,7 +88,8 @@
   font-size: 0.95rem;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   padding: 12px 32px;
-  background: rgba(45, 52, 54, 0.9); /* Dark Charcoal */
+  background: rgba(45, 52, 54, 0.9);
+  /* Dark Charcoal */
   border-radius: 40px;
   display: flex;
   align-items: center;
@@ -130,13 +134,16 @@
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.5); /* Semi-transparent white to block texture */
+  background: rgba(255, 255, 255, 0.5);
+  /* Semi-transparent white to block texture */
   backdrop-filter: blur(10px);
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.08); /* Dark subtle border */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Soft shadow for "lift" */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  /* Dark subtle border */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  /* Soft shadow for "lift" */
 }
 
 .location-picker:hover {
@@ -147,9 +154,12 @@
 }
 
 .location-text {
-  font-size: 0.9rem; /* Slightly larger */
-  font-weight: 700; /* Bolder */
-  color: #111111; /* Pure dark for visibility */
+  font-size: 0.9rem;
+  /* Slightly larger */
+  font-weight: 700;
+  /* Bolder */
+  color: #111111;
+  /* Pure dark for visibility */
   max-width: 340px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -158,7 +168,8 @@
 }
 
 .location-picker:hover .location-text {
-  color: var(--primary); /* Hover feedback */
+  color: var(--primary);
+  /* Hover feedback */
 }
 
 .location-error {
@@ -174,7 +185,8 @@
   color: white;
   cursor: pointer;
   padding: 5px;
-  z-index: 1001; /* Above overlay */
+  z-index: 1001;
+  /* Above overlay */
 }
 
 /* Mobile Menu Overlay */
@@ -222,7 +234,8 @@
   .navbar-links {
     position: fixed;
     top: 0;
-    right: -300px; /* Hidden off-screen */
+    right: -300px;
+    /* Hidden off-screen */
     width: 280px;
     height: 100vh;
     background: #ffffff;
@@ -231,7 +244,7 @@
     padding: 30px 20px;
     gap: 1.5rem;
     z-index: 999;
-    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
     transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow-y: auto;
   }
@@ -267,7 +280,8 @@
   }
 
   .navbar-link::before {
-    display: none; /* Remove water fill on mobile */
+    display: none;
+    /* Remove water fill on mobile */
   }
 
   .navbar-link:hover {
@@ -282,7 +296,8 @@
   .mobile-only-item {
     display: block !important;
     width: 100%;
-    margin-top: auto; /* Push to bottom */
+    margin-top: auto;
+    /* Push to bottom */
     padding-top: 20px;
     border-top: 1px solid #eee;
   }
@@ -298,12 +313,15 @@
   .navbar-logo {
     font-size: 1.5rem;
   }
-  
+
   .navbar-actions .order-btn {
-    display: none; /* Hide 'Order Now' on very small screens to save space */
+    display: none;
+    /* Hide 'Order Now' on very small screens to save space */
   }
-  
+
   .navbar {
     padding: 1.2rem 5%;
   }
+}
+}
 }

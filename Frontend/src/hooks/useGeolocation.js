@@ -28,12 +28,12 @@ const useGeolocation = () => {
             if (data && data.display_name) {
                 const addr = data.address;
                 const shortAddress = addr.city || addr.town || addr.suburb || addr.village || data.display_name.split(',')[0];
-                
+
                 // 2. Persistence: Save on Success
                 setAddress(shortAddress);
                 localStorage.setItem("user_address", shortAddress);
                 localStorage.setItem("user_coords", JSON.stringify({ lat, lng }));
-                
+
                 setError(null);
             } else {
                 setError("Location name not found");
@@ -66,7 +66,7 @@ const useGeolocation = () => {
                 if (err.code === 1) msg = "Permission Denied by user";
                 else if (err.code === 2) msg = "Location unavailable";
                 else if (err.code === 3) msg = "Timeout reaching GPS";
-                
+
                 setError(msg);
                 setLoading(false);
             },
