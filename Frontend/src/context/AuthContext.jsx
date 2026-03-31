@@ -6,10 +6,35 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
+        const checkSession = async () => {
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                setUser(JSON.parse(storedUser));
+            }
+
+            // Always verify session status with backend on mount
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/profile', {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setUser(data);
+                    localStorage.setItem('user', JSON.stringify(data));
+                } else {
+                    // Only clear if the session is definitely invalid
+                    setUser(null);
+                    localStorage.removeItem('user');
+                }
+            } catch (error) {
+                console.error("Session verification failed:", error);
+            }
+        };
+
+        checkSession();
     }, []);
 
     const login = (userData) => {

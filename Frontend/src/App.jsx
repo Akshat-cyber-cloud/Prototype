@@ -2,13 +2,15 @@ import React from 'react'
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Navbar from './Components/Navbar'
 import Home from './Components/Home'
-import Login from './Components/Login' // We will create this next
+import Login from './Components/Login' 
+import Profile from './Components/Profile'
 import Welcome from './Components/Welcome'
 import Menu from './Component1/Menu'
 import CartSidebar from './Components/CartSidebar'
 import Checkout from './Components/Checkout'
 import OrderSuccess from './Components/OrderSuccess'
 import OrderHistory from './Components/OrderHistory'
+import Contact from './Components/Contact'
 import { useAuth } from './context/AuthContext'
 import './index.css'
 
@@ -28,6 +30,8 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/order-history" element={<OrderHistory />} />
+        <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/welcome" element={<Navigate to="/menu" replace />} />
       </Routes>
     </div>

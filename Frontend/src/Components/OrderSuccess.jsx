@@ -41,7 +41,7 @@ const OrderSuccess = () => {
                         </svg>
                     </div>
                     <h2>Order Placed Successfully</h2>
-                    <p>Thank you! Your delicious meal is being prepared.</p>
+                    <p>Thank you! Your meal is being prepared.</p>
                 </div>
 
                 {/* 📄 Info Section: Bill Details */}
@@ -72,20 +72,17 @@ const OrderSuccess = () => {
                         </div>
                     ))}
                     
-                    <div className="info-row" style={{ marginTop: '20px', borderTop: '1px solid #eee', paddingTop: '15px' }}>
+                    <div className="info-row" style={{ marginTop: '15px', borderTop: '1px solid #eee', paddingTop: '10px' }}>
                         <span className="info-label" style={{ fontWeight: '700', color: '#1a1a1a' }}>Total Paid:</span>
-                        <span className="info-value" style={{ fontSize: '1.2rem', color: '#1a1a1a' }}>₹{total.toFixed(2)}</span>
+                        <span className="info-value" style={{ fontSize: '1.1rem', color: '#1a1a1a' }}>₹{total.toFixed(2)}</span>
                     </div>
                 </div>
 
                 {/* 💳 Payment Method Box */}
                 <div className="payment-method-box">
-                    <div className="payment-logo">
-                        RAZORPAY
-                    </div>
+                    <div className="payment-logo">RAZORPAY</div>
                     <div className="payment-details">
-                        Secure Digital Payment<br/>
-                        Transaction: #TXN_{Math.floor(Math.random() * 1000000)}
+                        Secure Digital Payment
                     </div>
                 </div>
 

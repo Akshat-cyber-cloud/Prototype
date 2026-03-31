@@ -13,7 +13,7 @@ const Login = () => {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    
+
     const navigate = useNavigate();
     const location = useLocation();
     const { login } = useAuth();
@@ -46,7 +46,7 @@ const Login = () => {
 
             // Success: Update global Auth State
             login({ name: data.name, email: data.email });
-            
+
             // Redirect to previous intended page (like Cart) or Menu
             const from = location.state?.from || '/menu';
             navigate(from);
@@ -55,6 +55,10 @@ const Login = () => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleGoogleLogin = () => {
+        window.location.href = 'http://localhost:3000/api/auth/google';
     };
 
     return (
@@ -82,36 +86,36 @@ const Login = () => {
                         {!isLogin && (
                             <div className="input-group">
                                 <label>Full Name</label>
-                                <input 
-                                    type="text" 
-                                    name="name" 
-                                    placeholder="John Doe" 
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="John Doe"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    required 
+                                    required
                                 />
                             </div>
                         )}
                         <div className="input-group">
                             <label>Email Address</label>
-                            <input 
-                                type="email" 
-                                name="email" 
-                                placeholder="john@example.com" 
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="john@example.com"
                                 value={formData.email}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
                         </div>
                         <div className="input-group">
                             <label>Password</label>
-                            <input 
-                                type="password" 
-                                name="password" 
-                                placeholder="••••••••" 
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="••••••••"
                                 value={formData.password}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
                         </div>
 
@@ -129,11 +133,22 @@ const Login = () => {
                         </button>
                     </form>
 
+                    <div className="auth-divider">OR</div>
+
+                    <button className="google-btn" onClick={handleGoogleLogin}>
+                        <img 
+                            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+                            alt="Google" 
+                            className="google-icon" 
+                        />
+                        {isLogin ? "Continue with Google" : "Sign up with Google"}
+                    </button>
+
                     <div className="card-footer">
                         <p>
                             {isLogin ? "Don't have an account?" : "Already have an account?"}
-                            <button 
-                                className="toggle-btn" 
+                            <button
+                                className="toggle-btn"
                                 onClick={() => {
                                     setIsLogin(!isLogin);
                                     setError('');
