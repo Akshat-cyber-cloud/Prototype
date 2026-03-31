@@ -120,7 +120,8 @@ exports.googleCallback = async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
         });
 
-        // Redirect to Frontend
+        // Redirect to Frontend after successful Google Auth
+        // Prioritize: Env Var -> Production URL -> Localhost Fallback
         const frontendUrl = process.env.FRONTEND_URL || "https://prototype-sandy-rho.vercel.app";
         res.redirect(`${frontendUrl}/menu`);
     } catch (error) {

@@ -16,7 +16,7 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <Link to="/" className="navbar-logo">
+                <Link to={user ? "/menu" : "/"} className="navbar-logo">
                     <span className="logo-text">FOODZ</span>
                     <span className="logo-dot">.</span>
                 </Link>
