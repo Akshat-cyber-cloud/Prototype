@@ -1,9 +1,9 @@
 :root {
   /* Base */
-  --bg-primary: #F7F3EE;
-  --bg-secondary: #FFFFFF;
-  --surface-soft: #FFF8F2;
-  --border: #E5E0DA;
+  --bg-primary: #FCF6F0;   /* Premium Off-White / Eggshell */
+  --bg-secondary: #FAF9F6; /* Soft Linen */
+  --surface-soft: #FFFBF7;
+  --border: #E8E2DA;
 
   /* Text */
   --text-primary: #2C2C2C;

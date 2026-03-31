@@ -34,7 +34,8 @@ const MenuShowcase = () => {
             category: 'Shawarma',
             title: 'Shawarma',
             subtitle: 'A shawarma is a flavorful Middle Eastern wrap made with slow-roasted meat, fresh veggies, and creamy sauces.',
-            img: 'swarma1.png'
+            img: 'swarma1.png',
+            isBestseller: true
         },
         {
             category: 'Rice Bowl',
@@ -52,31 +53,63 @@ const MenuShowcase = () => {
             category: 'Pancakes',
             title: 'Pancakes',
             subtitle: 'A pancake is a soft, fluffy flat cake served warm and often topped with syrup, butter, or fruits.',
-            img: 'panckae.png'
+            img: 'panckae.png',
+            isBestseller: true
         }
     ];
 
     const features = [
         {
-            title: 'GOODZ GATHERINGS',
-            desc: 'Elevate your event with the legendary charisma of hand-carved, street-style shawarma and gourmet sides.',
+            title: 'CHEF\'S HAND-CARVED',
+            desc: 'Every slice of our signature meat is hand-carved with precision, ensuring the perfect balance of juices and crispy edges.',
             icon: (
                 <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 1.53-.5 2h-1c-.17-.47-.5-1.5-.5-2Z" /><path d="M15 17a1 1 0 0 1 2 0c0 .5-.34 1.53-.5 2h-1c-.17-.47-.5-1.5-.5-2Z" /><path d="M7 17a1 1 0 0 1 2 0c0 .5-.34 1.53-.5 2h-1c-.17-.47-.5-1.5-.5-2Z" /><path d="M9 11V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5" /><rect x="2" y="11" width="20" height="10" rx="2" /></svg>
             )
         },
         {
-            title: 'CRAFT THE CRUNCH',
-            desc: "Join our squad of flavor architects. We value precision, passion, and the art of building the world's perfect wrap.",
+            title: 'SECRET SPICE DNA',
+            desc: "Our legendary spice blend is a 20-year obsession. A flavor profile so unique, it's our signature fingerprint in every bite.",
             icon: (
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 19.07 7.76 16.24"/><path d="m16.24 7.76 2.83-2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/></svg>
             )
         },
         {
-            title: 'SCALE THE LEGEND',
-            desc: 'Spread the shawarma fever. Own a franchise and bring our gold standard of flavors to your neighborhood.',
+            title: '30-MIN HOT CHALLENGE',
+            desc: 'We promise piping hot delivery within 30 minutes of carving, or your next legendary wrap is on the house.',
             icon: (
                 <svg viewBox="0 0 24 24" width="32" height="32" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
             )
+        }
+    ];
+
+    const testimonials = [
+        {
+            name: "Karan S.",
+            role: "Verified Foodie",
+            content: "Authentic spices, perfectly charred meat, and that garlic sauce... absolute perfection. Best shawarma in the city!",
+            rating: 5,
+            time: "2 days ago"
+        },
+        {
+            name: "Sneha M.",
+            role: "Sweet Tooth",
+            content: "The loaded waffles are heavenly. Still warm and crispy when they arrived. My new weekend ritual!",
+            rating: 5,
+            time: "1 week ago"
+        },
+        {
+            name: "Rahul K.",
+            role: "Daily Diner",
+            content: "I took the 30-min challenge and they blew my mind. 22 mins from order to door. Legends!",
+            rating: 5,
+            time: "3 days ago"
+        },
+        {
+            name: "Priya V.",
+            role: "Gourmet Lover",
+            content: "The Rice Bowls are a lifesaver for busy office lunches. Healthy, filling, and so flavorful.",
+            rating: 5,
+            time: "5 days ago"
         }
     ];
 
@@ -84,7 +117,7 @@ const MenuShowcase = () => {
     return (
         <section
             ref={containerRef}
-            className={`menu-showcase-container theme-dark ${isVisible ? 'fade-in-active' : ''}`}
+            className={`menu-showcase-container ${isVisible ? 'fade-in-active' : ''}`}
             style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
@@ -97,6 +130,9 @@ const MenuShowcase = () => {
                 <div className="menu-grid">
                     {menuItems.map((item, idx) => (
                         <div key={idx} className={`category-card card-${item.category}`}>
+                            {item.isBestseller && (
+                                <div className="bestseller-badge">🔥 BESTSELLER</div>
+                            )}
                             <div className="card-image-box">
                                 <img src={item.img} alt={item.title} loading="lazy" />
                             </div>
@@ -108,7 +144,7 @@ const MenuShowcase = () => {
                                     style={{ backgroundColor: 'var(--shawarma)', cursor: 'pointer' }}
                                     onClick={() => navigate('/menu')}
                                 >
-                                    Try it Now
+                                    Satisfy Your Craving
                                 </button>
                             </div>
                         </div>
@@ -157,6 +193,72 @@ const MenuShowcase = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </div>
+
+
+            {/* 🎯 NEW: High-Impact Delivery Challenge Banner */}
+            <div className="delivery-challenge-section">
+                <div className="challenge-content">
+                    <span className="challenge-small-text">CRISPY, EVERY BITE TASTE</span>
+                    <h2 className="challenge-title">
+                        30 MINUTES FAST
+                        <span className="highlight-text"> DELIVERY </span>
+                        CHALLENGE
+                    </h2>
+                    <button className="challenge-cta" onClick={() => navigate('/menu')}>Order Online Now</button>
+                </div>
+                <div className="challenge-visual">
+                    <img 
+                        src="/delivery_scooter_character.png" 
+                        alt="30 Minute Delivery Challenge" 
+                        className="scooter-visual"
+                    />
+                </div>
+            </div>
+
+            {/* ⭐ Testimonials Section */}
+            <div className="testimonials-section">
+                <div className="testimonials-header">
+                    <div className="header-left">
+                        <span className="quote-icon">“</span>
+                        <h2 className="testimonials-main-title">What our <br />customers are <br />saying</h2>
+                        <div className="nav-hints">
+                            <span className="nav-arrow">←</span>
+                            <div className="nav-line"></div>
+                            <span className="nav-arrow">→</span>
+                        </div>
+                    </div>
+                    <div className="header-right">
+                        <h3 className="trust-title">Read reviews, <br />order with confidence.</h3>
+                        <div className="trust-badge">
+                            <span className="trust-score">4.8/5</span>
+                            <span className="trust-star">★</span>
+                            <span className="trust-name">FOODZ. TRUSTED</span>
+                            <span className="trust-count">Based on 8,420 reviews</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="testimonials-slider">
+                    <div className="testimonials-track">
+                        {/* Double the array for infinite loop */}
+                        {[...testimonials, ...testimonials].map((t, i) => (
+                            <div key={i} className="testimonial-card">
+                                <p className="t-content">"{t.content}"</p>
+                                <div className="t-rating">
+                                    {[...Array(t.rating)].map((_, j) => <span key={j}>★</span>)}
+                                </div>
+                                <div className="t-footer">
+                                    <div className="t-avatar">{t.name[0]}</div>
+                                    <div className="t-info">
+                                        <span className="t-name">{t.name}</span>
+                                        <span className="t-meta">{t.role} • {t.time}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 

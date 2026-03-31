@@ -96,6 +96,7 @@ const Profile = () => {
 
     return (
         <div className="profile-container">
+            <button className="close-profile-btn" onClick={() => navigate('/')}>✕</button>
             <div className="profile-header">
                 <img 
                     src={formData.avatar || "https://www.w3schools.com/howto/img_avatar.png"} 

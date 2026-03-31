@@ -29,12 +29,25 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Paid", "Preparing", "Delivered", "Cancelled"],
-        default: "Paid"
+        enum: ["Confirmed", "Cooking", "On the way", "Delivered", "Cancelled"],
+        default: "Confirmed"
     },
     paymentMethod: {
         type: String,
         default: "Razorpay"
+    },
+    razorpayOrderId: {
+        type: String
+    },
+    razorpayPaymentId: {
+        type: String
+    },
+    razorpaySignature: {
+        type: String
+    },
+    paid: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true

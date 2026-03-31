@@ -1,6 +1,6 @@
 .order-success-page {
   min-height: 100vh;
-  background-color: #f4f7ff; /* Soft light blue/lavender like the reference */
+  background-color: #f4f7ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,14 +8,12 @@
   font-family: 'Outfit', sans-serif;
 }
 
-.receipt-card {
-  background: white;
+.order-dashboard {
+  background: transparent;
   width: 100%;
-  max-width: 400px;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-  position: relative;
-  overflow: hidden;
+  max-width: 1000px;
+  display: flex;
+  gap: 30px;
   animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -24,196 +22,233 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* The "Punch" Effect on sides */
-.receipt-card::before,
-.receipt-card::after {
-  content: '';
-  position: absolute;
-  top: 45%; /* Alignment with the dashed line */
-  width: 30px;
-  height: 30px;
-  background-color: #f4f7ff; /* Match page background */
-  border-radius: 50%;
-  z-index: 10;
+/* 🥗 Left Column: Live Status Experiene */
+.status-left {
+  flex: 1.2;
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.receipt-card::before { left: -15px; }
-.receipt-card::after { right: -15px; }
-
-/* Top Section: Success Icon & Header */
-.receipt-header {
-  padding: 30px 25px 15px;
-  text-align: center;
+.status-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 }
 
-.success-icon-wrapper {
-  width: 60px;
-  height: 60px;
-  background-color: #e8f7f0;
+.status-left h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.status-left p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+/* 📉 Status Tracker Styles (Refined for Dashboard) */
+.order-tracker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  position: relative;
+}
+
+.tracker-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+  opacity: 0.3;
+  transition: all 0.4s ease;
+}
+
+.tracker-step.active {
+  opacity: 1;
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  background: #f1f3f8;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 15px;
+  font-size: 1.4rem;
+  color: #888;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
 }
 
-.success-icon-wrapper svg {
-  width: 30px;
-  height: 30px;
-  color: #2ecc71;
+.tracker-step.active .step-icon {
+  background: #fff4e5;
+  color: #e67e22;
+  border-color: #e67e22;
+  box-shadow: 0 0 20px rgba(230, 126, 34, 0.2);
 }
 
-.receipt-header h2 {
-  font-size: 1.35rem;
-  font-weight: 700;
+.step-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.tracker-step.active .step-label {
   color: #1a1a1a;
-  margin-bottom: 6px;
 }
 
-.receipt-header p {
-  color: #666;
-  font-size: 0.9rem;
+.tracker-line {
+  flex: 1;
+  height: 3px;
+  background: #eee;
+  margin-top: -25px; /* Alignment with circle centers */
+  z-index: 1;
 }
 
-/* Info Section (Top Half) */
-.receipt-info {
-  padding: 15px 25px;
-  border-bottom: 2px dashed #eee;
+/* 🧾 Right Column: The Receipt */
+.receipt-right {
+  flex: 0.8;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
   position: relative;
+  overflow: hidden;
+}
+
+/* Receipt "Punch" effect only on the detail side */
+.receipt-right::before,
+.receipt-right::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  width: 24px;
+  height: 24px;
+  background-color: #f4f7ff;
+  border-radius: 50%;
+  z-index: 10;
+}
+.receipt-right::before { left: -12px; }
+.receipt-right::after { right: -12px; }
+
+.receipt-header-mini {
+  padding: 30px 30px 15px;
+  border-bottom: 2px dashed #eee;
+}
+
+.receipt-info {
+  padding: 20px 30px;
 }
 
 .info-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 0.85rem;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
 }
 
-.info-label { color: #888; }
-.info-value { font-weight: 600; color: #333; }
+.info-label { color: #999; }
+.info-value { font-weight: 700; color: #333; }
 
-/* Items Section (Bottom Half) */
 .receipt-items {
-  padding: 30px 30px 20px;
+  padding: 10px 30px 20px;
+  flex: 1;
 }
 
 .item-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
-.item-details {
+.item-name { font-weight: 600; color: #333; font-size: 0.9rem; }
+.item-qty { font-size: 0.75rem; color: #aaa; margin-top: 2px; }
+.item-price { font-weight: 700; color: #333; font-size: 0.9rem; }
+
+.receipt-footer {
+  padding: 20px 30px 30px;
+  background: #fafafa;
+}
+
+.total-row {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-top: 10px;
 }
 
-.item-name {
-  font-weight: 600;
-  color: #333;
-  font-size: 0.95rem;
-}
+.total-label { font-weight: 800; color: #666; font-size: 0.8rem; text-transform: uppercase; }
+.total-value { font-weight: 900; color: #1a1a1a; font-size: 1.4rem; }
 
-.item-qty {
-  font-size: 0.8rem;
-  color: #999;
-}
-
-.item-price {
-  font-weight: 600;
-  color: #333;
-}
-
-/* Payment Method Box */
-.payment-method-box {
-  background-color: #f1f3f8;
-  border-radius: 12px;
-  padding: 10px 15px;
-  margin: 15px 25px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.payment-logo {
+.otp-box {
   background: white;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-weight: 900;
-  color: #2e69ff;
-  font-size: 0.8rem;
-  letter-spacing: -1px;
-  border: 1px solid #e0e0e0;
-}
-
-.payment-details {
-  font-size: 0.8rem;
-  color: #555;
-  line-height: 1.2;
-}
-
-/* OTP Badge */
-.otp-section {
+  border: 2px solid #eee;
+  border-radius: 16px;
+  padding: 15px;
   text-align: center;
-  padding: 0 25px 20px;
+  margin-bottom: 20px;
 }
 
-.otp-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #aaa;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.otp-code {
-  font-size: 1.8rem;
-  font-weight: 800;
+.otp-code-mini {
+  font-size: 1.6rem;
+  font-weight: 900;
   color: var(--primary, #e67e22);
-  letter-spacing: 6px;
-  margin-bottom: 15px;
-  font-family: 'Space Mono', monospace;
+  letter-spacing: 4px;
 }
 
-/* Footer Buttons */
 .receipt-actions {
   display: flex;
-  gap: 12px;
-  padding: 0 25px 30px;
+  gap: 10px;
 }
 
-.btn-receipt-primary {
+.btn-dashboard-primary {
   flex: 2;
-  background-color: #000;
+  background: #000;
   color: white;
   border: none;
-  border-radius: 10px;
-  padding: 12px;
-  font-weight: 600;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
 }
 
-.btn-receipt-secondary {
+.btn-dashboard-secondary {
   flex: 1;
-  background-color: white;
-  color: #555;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 12px;
-  font-weight: 600;
+  background: white;
+  border: 1.5px solid #eee;
+  color: #666;
+  padding: 14px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
 }
 
-.btn-receipt-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.btn-receipt-secondary:hover { background-color: #f9f9f9; }
+.btn-dashboard-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-@media (max-width: 480px) {
-  .receipt-card {
-    max-width: 100%;
+@media (max-width: 900px) {
+  .order-dashboard {
+    flex-direction: column;
+    max-width: 500px;
   }
+  .status-left h2 { font-size: 1.8rem; }
 }
