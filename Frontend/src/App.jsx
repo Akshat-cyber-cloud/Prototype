@@ -11,6 +11,7 @@ import Checkout from './Components/Checkout'
 import OrderSuccess from './Components/OrderSuccess'
 import OrderHistory from './Components/OrderHistory'
 import Contact from './Components/Contact'
+import Footer from './Components/Footer'
 import { useAuth } from './context/AuthContext'
 import './index.css'
 
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/welcome" element={<Navigate to="/menu" replace />} />
       </Routes>
+      {!isLoginPage && <Footer />}
     </div>
   )
 }

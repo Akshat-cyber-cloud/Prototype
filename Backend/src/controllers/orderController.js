@@ -17,7 +17,7 @@ exports.createOrder = async (req, res) => {
             total,
             otp,
             orderId,
-            status: "Paid",
+            status: "Confirmed",
             paymentMethod: "Razorpay"
         });
 

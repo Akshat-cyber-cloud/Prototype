@@ -42,6 +42,7 @@ const OrderHistory = () => {
             total: order.total,
             otp: order.otp,
             orderId: order.orderId,
+            status: order.status, // Pass the current status
             date: new Date(order.createdAt).toLocaleString()
         };
         navigate('/order-success', { state: receiptData });

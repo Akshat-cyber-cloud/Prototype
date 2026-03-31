@@ -131,14 +131,16 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
-.niche-price {
-    font-size: 1.2rem;
-    font-weight: 800;
+.niche-available {
+    font-size: 0.8rem;
+    font-weight: 700;
     color: #1a1a1a;
     transition: color 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.niche-capsule.active .niche-price {
+.niche-capsule.active .niche-available {
     color: #ffffff;
 }
 

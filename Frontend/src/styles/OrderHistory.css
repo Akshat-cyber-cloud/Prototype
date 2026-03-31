@@ -92,9 +92,29 @@
   color: #555;
 }
 
-.status-badge.paid {
+.status-badge.confirmed {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-badge.cooking {
+  background-color: #fff3e0;
+  color: #fb8c00;
+}
+
+.status-badge.on.the.way {
+  background-color: #f3e5f5;
+  color: #8e24aa;
+}
+
+.status-badge.delivered {
   background-color: #e8f7f0;
   color: #2ecc71;
+}
+
+.status-badge.cancelled {
+  background-color: #fee2e2;
+  color: #ef4444;
 }
 
 .card-body {

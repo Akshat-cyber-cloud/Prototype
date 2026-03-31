@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -10,13 +10,27 @@ const Checkout = () => {
     const navigate = useNavigate();
 
     // Default states
-    const [address, setAddress] = useState("Rumah Kedua (+6281234567899)\nJalan Bunga No 7, RT 02 RW 01\nKOTA BARU\nJAWA BARAT\nINDONESIA, 12345");
+    const [address, setAddress] = useState("");
     const [isEditingAddress, setIsEditingAddress] = useState(false);
     const [selectedPayment, setSelectedPayment] = useState('razorpay');
     const [shippingOption, setShippingOption] = useState("Standard"); // Standard vs Express
-    
+
+    // 🏗️ Autofill Address from Profile on Mount
+    useEffect(() => {
+        if (user && user.address) {
+            setAddress(user.address);
+        } else if (user && user.phone) {
+            // Fallback: If only phone exists, at least show that
+            setAddress(`Contact: ${user.phone}`);
+        } else {
+            // Default placeholder if no profile data
+            setAddress("");
+            setIsEditingAddress(true); // Open edit mode if empty
+        }
+    }, [user]);
+
     // Calculate values
-    const shippingFee = shippingOption === "Express" ? 150 : 50;
+    const shippingFee = shippingOption === "Express" ? 0 : 0;
     const finalPayment = Math.max(0, cartSubtotal + shippingFee - (voucher ? voucher.discount : 0));
 
     const handlePlaceOrder = async () => {
@@ -25,45 +39,100 @@ const Checkout = () => {
             return;
         }
 
-        // 🏗️ Generate Order Metadata
-        const orderId = `BILL-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-        const otp = Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit secure OTP
-        const dateString = new Date().toLocaleString();
-        
-        // Finalize order summary for the receipt
-        const finalOrder = {
-            items: cartItems.map(item => ({
-                name: item.name,
-                price: item.price,
-                quantity: item.quantity || 1,
-                image: item.image
-            })),
-            total: finalPayment,
-            otp: otp,
-            orderId: orderId,
-            date: dateString
-        };
-
         try {
-            // 💾 Save Order to Database
-            const response = await fetch('http://localhost:3000/api/orders', {
+            // 0️⃣ Fetch Razorpay Key ID
+            const keyResponse = await fetch('http://localhost:3000/api/payment/get-key', {
+                credentials: 'include'
+            });
+            if (!keyResponse.ok) throw new Error("Could not fetch payment configuration");
+            const { key: razorpayKey } = await keyResponse.json();
+
+            // 1️⃣ Create Razorpay Order on Backend
+            const orderResponse = await fetch('http://localhost:3000/api/payment/create-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(finalOrder),
+                body: JSON.stringify({
+                    amount: finalPayment,
+                    currency: "INR",
+                    receipt: `receipt_${Date.now()}`
+                }),
                 credentials: 'include'
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Failed to save order");
-            }
+            if (!orderResponse.ok) throw new Error("Failed to initialize payment");
+            const rzpOrder = await orderResponse.json();
 
-            // Clear cart and redirect to the Receipt page
-            clearCart();
-            navigate('/order-success', { state: finalOrder });
+            // 2️⃣ Open Razorpay Checkout Modal
+            const options = {
+                key: razorpayKey, // Dynamically fetched from .env
+                amount: rzpOrder.amount,
+                currency: rzpOrder.currency,
+                name: "FOODZ.",
+                description: "Premium Food Delivery",
+                image: "https://i.imgur.com/39GvU9X.png", // Use hosted secure image to avoid CORS/Mixed Content blocks
+                order_id: rzpOrder.id,
+                handler: async function (response) {
+                    // 3️⃣ Verify Payment on Backend
+                    const verifyResponse = await fetch('http://localhost:3000/api/payment/verify', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            orderData: {
+                                items: cartItems.map(item => ({
+                                    name: item.name,
+                                    price: item.price,
+                                    quantity: item.quantity || 1,
+                                    image: item.image
+                                })),
+                                total: finalPayment,
+                                orderId: `BILL-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+                                otp: Math.floor(1000 + Math.random() * 9000).toString(),
+                                date: new Date().toLocaleString()
+                            }
+                        }),
+                        credentials: 'include'
+                    });
+
+                    const verifyData = await verifyResponse.json();
+
+                    if (verifyData.success) {
+                        clearCart();
+                        navigate('/order-success', { state: verifyData.order });
+                    } else {
+                        alert("Payment verification failed. Please contact support.");
+                    }
+                },
+                prefill: {
+                    name: user.name || "",
+                    email: user.email || "",
+                    contact: user.phone || ""
+                },
+                theme: {
+                    color: "#E67E22" // Brand orange
+                },
+                modal: {
+                    ondismiss: function () {
+                        console.log("Checkout modal closed by user.");
+                    }
+                }
+            };
+
+            const rzp = new window.Razorpay(options);
+
+            // ❌ Handle Payment Failure
+            rzp.on('payment.failed', function (response) {
+                console.error("Payment Failed:", response.error);
+                alert(`Payment Failed: ${response.error.description}. Please try again.`);
+            });
+
+            rzp.open();
+
         } catch (error) {
-            console.error("Order Creation Error:", error.message);
-            alert("Oops! There was a problem saving your order. Please try again.");
+            console.error("Checkout Error:", error.message);
+            alert("Payment initialization failed. Please try again.");
         }
     };
 
