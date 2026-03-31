@@ -30,13 +30,14 @@ exports.register = async (req, res) => {
 
         if (user) {
             const token = generateToken(user._id);
+            const isProduction = process.env.NODE_ENV === "production";
             
             // Set HttpOnly Cookie
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: false, // Set to true in production (HTTPS)
-                sameSite: "Lax",
-                maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+                secure: isProduction, // Secure in Prod (HTTPS)
+                sameSite: isProduction ? "none" : "lax", // Cross-site support in Prod
+                maxAge: 30 * 24 * 60 * 60 * 1000, 
             });
 
             res.status(201).json({
@@ -64,12 +65,13 @@ exports.login = async (req, res) => {
 
         if (user && (await user.matchPassword(password))) {
             const token = generateToken(user._id);
+            const isProduction = process.env.NODE_ENV === "production";
 
             // Set HttpOnly Cookie
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: false, 
-                sameSite: "Lax",
+                secure: isProduction,
+                sameSite: isProduction ? "none" : "lax",
                 maxAge: 30 * 24 * 60 * 60 * 1000,
             });
 
@@ -90,8 +92,11 @@ exports.login = async (req, res) => {
 // @route   POST /api/auth/logout
 // @access  Private
 exports.logout = async (req, res) => {
+    const isProduction = process.env.NODE_ENV === "production";
     res.cookie("token", "", {
         httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         expires: new Date(0),
     });
     res.status(200).json({ message: "Logged out successfully" });
@@ -105,17 +110,19 @@ exports.googleCallback = async (req, res) => {
     try {
         const user = req.user;
         const token = generateToken(user._id);
+        const isProduction = process.env.NODE_ENV === "production";
 
         // Set HttpOnly Cookie
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false, // Set to true in production
-            sameSite: "Lax",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
             maxAge: 30 * 24 * 60 * 60 * 1000,
         });
 
         // Redirect to Frontend
-        res.redirect("http://localhost:5173/menu");
+        const frontendUrl = process.env.FRONTEND_URL || "https://prototype-sandy-rho.vercel.app";
+        res.redirect(`${frontendUrl}/menu`);
     } catch (error) {
         res.status(500).json({ message: "Auth Error", error: error.message });
     }
