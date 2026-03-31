@@ -13,11 +13,15 @@ import OrderHistory from './Components/OrderHistory'
 import Contact from './Components/Contact'
 import Footer from './Components/Footer'
 import { useAuth } from './context/AuthContext'
+import LoadingScreen from './Components/LoadingScreen'
 import './index.css'
 
 const App = () => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  
+  if (loading) return <LoadingScreen message="Welcome to Foodz..." />;
+  
   const isLoginPage = location.pathname === '/login';
 
   return (

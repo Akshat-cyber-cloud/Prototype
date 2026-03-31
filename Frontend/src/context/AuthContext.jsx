@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const checkSession = async () => {
@@ -14,11 +15,16 @@ export const AuthProvider = ({ children }) => {
 
             // Always verify session status with backend on mount
             try {
-                const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
+                // Ensure the premium loader stays for at least 3 seconds for brand presence
+                const minLoaderTime = new Promise(resolve => setTimeout(resolve, 3000));
+                
+                const fetchProfile = fetch(`${API_BASE_URL}/api/auth/profile`, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include'
                 });
+
+                const [response] = await Promise.all([fetchProfile, minLoaderTime]);
 
                 if (response.ok) {
                     const data = await response.json();
@@ -31,6 +37,8 @@ export const AuthProvider = ({ children }) => {
                 }
             } catch (error) {
                 console.error("Session verification failed:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -57,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

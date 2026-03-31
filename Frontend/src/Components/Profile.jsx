@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { API_BASE_URL } from '../apiConfig'; // Added: Centralized API config
+import { API_BASE_URL } from '../apiConfig'; 
+import LoadingScreen from './LoadingScreen';
 import '../styles/Profile.css';
 
 const Profile = () => {
@@ -93,7 +94,7 @@ const Profile = () => {
         navigate('/');
     };
 
-    if (loading) return <div className="loading">Loading Profile...</div>;
+    if (loading) return <LoadingScreen message="Fetching your profile..." />;
 
     return (
         <div className="profile-container">
